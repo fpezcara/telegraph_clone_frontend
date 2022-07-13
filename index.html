@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="../assets/js/script.js"></script>
-    <title>Telegram</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon">
+    <script defer src="./assets/js/script.js"></script>
+    <title>Telegraph</title>
 </head>
+
 <body>
-    
+    <form>
+        <div id="form-container">
+            <div id="form-body">
+                <div>
+                <p id="title-p"></p>
+                <input type="text" name="title" id="title" 
+                placeholder="Title">
+            </div>
+            <div>
+                <p id="pseudonym-p"></p>
+                <input type="text" name="pseudonym" id="pseudonym" placeholder="Your name">
+            </div>
+            <div>
+                <p id="message-p"></p>
+                <input type="text" name="message" id="message" placeholder="Your story...">
+            </div>
+            </div>
+            <div id="form-button">
+                <input type="submit" value="Publish">
+            </div>
+        </div>
+    </form>
 </body>
+
 </html>
