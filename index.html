@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/87bcd25794.js" crossorigin="anonymous"></script>
 
     <title>Telegraph</title>
 </head>
 
 <body>
-    <form>
+    <!-- needed for forms with file tags -->
+    <form enctype="multipart/form-data">
         <div id="form-container">
             <div id="form-body">
                 <div class="input-container">
@@ -25,10 +27,23 @@
                     <div class="divider"></div>
                     <input type="text" name="pseudonym" id="pseudonym" placeholder="Your name">
                 </div>
-                <div>
-                    <p id="message-p"></p>
+                <div class="input-container">
+                    <div id="message-icons">
+                        <div id="file-icon">
+                            <label for="file">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                            <input type="file" name="image" id="file">
+                        </div>
+                        <div id="url-icons">
+                            <i class="fa-solid fa-less-than"></i>
+                            <i class="fa-solid fa-greater-than"></i>
+                        </div>
+                        <input type="url" name="url" id="url">
+                    </div>
                     <input type="text" name="message" id="message" placeholder="Your story...">
                 </div>
+
             </div>
             <div id="form-button">
                 <input type="submit" value="Publish">

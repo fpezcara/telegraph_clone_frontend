@@ -77,6 +77,33 @@ form {
     font-size: 17px;
 }
 
+.input-container{
+}
+
+#url{
+    display: none;
+}
+
+
+#file-icon input{
+    display: none;
+}
+.fa-solid{
+    font-size: 14px;
+}
+
+.fa-camera{
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#message-icons{
+    display: flex;
+    width: 100px;
+    align-items: space-between;
+    justify-content: space-around;
+}
+
 #form-body .input-container:nth-child(1) {
     height: 40px;
     margin-bottom: 2px;
@@ -91,7 +118,6 @@ form {
     height: 40px;
     margin-top: 2px;
     width: 30em;
-    /* background: red; */
 
 }
 

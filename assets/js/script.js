@@ -7,6 +7,8 @@ let message = document.getElementById('message')
 let messageP = document.getElementById('message-p')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider");
+let fileInput = document.querySelector("#file")
+let urlInput = document.querySelector('#url')
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -19,26 +21,26 @@ form && form.addEventListener('submit', (e) => {
     const titleValue = title.value;
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
-
-    createMessage(titleValue, pseudonymValue, messageValue)
+    const urlValue = urlInput.value;
+    const images = fileInput.files;
+    // e.preventDefault();
+    console.log(images)
+    createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
     window.location.href = `./post.html`
     sessionStorage.setItem("title", titleValue);
 })
 
 
-const createMessage = async (title, name, story, url = "") => {
-    // e.preventDefault();
+const createMessage = async (title, name, story, url = "", images) => {
     try {
         // const { id, err } = await response.json();
-        const post = await fetchToCreatePost(title, name, story, url)
-        
-
+        const post = await fetchToCreatePost(title, name, story, url, images)
 
     } catch (err) {
         console.warn(err);
     }
     const fetch = await fetchPost(title)
-    console.log("RESPONSE in script.js ", fetch)
+    // console.log("RESPONSE in script.js ", fetch)
 
 }
 const keydownChanges = (input, pTag, textContent) => {
@@ -61,6 +63,11 @@ inputs && inputs.map(input => {
 message && message.addEventListener('keydown', (e) => {
     // let urlInput = document.createElement("p");
     // messageP.appendChild(urlInput)
+})
+
+fileInput.addEventListener("click", () => {
+    // <input type="file" name="file" id="file">
+    message.style.display = "none";
 })
 
 
