@@ -9,6 +9,8 @@ let divider = document.querySelectorAll(".divider");
 let fileInput = document.querySelector("#file")
 let urlInput = document.querySelector('#url')
 let icons = document.querySelectorAll('.fa-solid')
+let urlIcon = document.getElementById('url-icons')
+let messageIContainer = document.getElementById("message-input-container")
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -60,24 +62,40 @@ inputs && inputs.map(input => {
     })
 })
 
-message && message.addEventListener('click', (e) => {
-    console.log(e)
+
+
+message.onclick = () => {
     for (const icon of icons) {
         icon.style.color = 'rgba(0, 0, 0, .44)';
     }
-
-})
-
+}
 message.onblur = () => {
     for (const icon of icons) {
         icon.style.color = 'white';
     }
+    message.style.display = "flex";
 }
 
-urlInput.addEventListener("click", () => {
-    // <input type="file" name="file" id="file">
-    // Paste a YouTube, Vimeo or Twitter link and press Enter
-    message.style.display = "none";
-})
 
+
+
+urlIcon.onclick = () => {
+    const urlIconCss = `
+    color: blue;
+    padding: 0;
+    margin: 3px 0 0 0;
+    font-size: 16px;
+    width: 430px;
+
+    `
+
+    message.style.display = "none"
+    const urlI = document.createElement("input");
+    urlI.setAttribute('type', 'url');
+    urlI.setAttribute('placeholder', "Paste a YouTube, Vimeo or Twitter link and press Enter")
+    urlI.style.cssText = urlIconCss
+    messageIContainer.appendChild(urlI)
+}
+
+// urlIcon.addEventListener('click', () => { console.log("hola") })
 
