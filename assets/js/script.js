@@ -65,8 +65,9 @@ message && message.addEventListener('keydown', (e) => {
     // messageP.appendChild(urlInput)
 })
 
-fileInput.addEventListener("click", () => {
+urlInput.addEventListener("click", () => {
     // <input type="file" name="file" id="file">
+    // Paste a YouTube, Vimeo or Twitter link and press Enter
     message.style.display = "none";
 })
 
