@@ -10,7 +10,7 @@ let fileInput = document.querySelector("#file");
 let icons = document.querySelectorAll('.fa-solid');
 let urlIcon = document.getElementById('url-icons');
 let messageIContainer = document.getElementById("message-input-container");
-const urlI = document.createElement("input");
+let urlI = document.createElement("input");
 
 
 const inputs = [
@@ -24,9 +24,9 @@ form && form.addEventListener('submit', (e) => {
     const titleValue = title.value;
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
-    const urlValue = urlInput.value;
+    const urlValue = urlI.value;
     const images = fileInput.files;
-    console.log(e)
+    console.log(urlValue)
     createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
     window.location.href = `./post.html`
     sessionStorage.setItem("title", titleValue);
@@ -36,7 +36,7 @@ form && form.addEventListener('submit', (e) => {
 const createMessage = async (title, name, story, url = "", images) => {
     try {
         // const { id, err } = await response.json();
-        console.log(urlI.value)
+
         const post = await fetchToCreatePost(title, name, story, url, images);
 
     } catch (err) {
@@ -51,7 +51,6 @@ const keydownChanges = (input, pTag, textContent) => {
     divider.forEach(d => {
         d.classList.add("dividerOnfocus") //!NOT WORKIN!!
     })
-    console.log(urlI)
 
 
 }
@@ -69,21 +68,34 @@ inputs && inputs.map(input => {
 
 
 
-message.onclick = () => {
-    for (const icon of icons) {
-        icon.style.color = 'rgba(0, 0, 0, .44)';
-    }
-};
+// message.onclick = () => {
+//     for (const icon of icons) {
+//         icon.style.color = "darkslategray";
+//     }
+// };
 
-message.onblur = () => {
+// message.onblur = () => {
+//     for (const icon of icons) {
+//         icon.style.color = 'white';
+//     }
+//     message.style.display = "flex";
+// }
+
+message && message.addEventListener('click', () => {
+    for (const icon of icons) {
+        icon.style.color = "darkslategray";
+    }
+})
+
+message && message.addEventListener('blur', () => {
     for (const icon of icons) {
         icon.style.color = 'white';
     }
     message.style.display = "flex";
-}
+})
 
 
-urlIcon.onclick = () => {
+urlIcon && urlIcon.addEventListener('click', () => {
     const urlIconCss = `
     padding: 0;
     margin: 3px 0 0 0;
@@ -98,5 +110,5 @@ urlIcon.onclick = () => {
     messageIContainer.appendChild(urlI)
 
 
-}
+})
 

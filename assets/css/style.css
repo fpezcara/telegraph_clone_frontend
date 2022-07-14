@@ -118,6 +118,7 @@ form {
 
 }
 
+
 .message-icons-appear {
     display: flex;
     width: 100px;
@@ -167,6 +168,4 @@ form {
     height: 80%;
 }
 
-#message-input-container{
-    
-}
+#message-input-container {}

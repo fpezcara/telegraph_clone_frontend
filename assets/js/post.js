@@ -10,7 +10,7 @@ const showPost = async () => {
     const p = document.createElement("p");
 
     h1.textContent = postTitle;
-    address.textContent = `${name} - ${date}`;
+    address.textContent = `${name} · ${date}`;
     p.textContent = story;
     main && main.append(h1, address, p);
 
