@@ -1,17 +1,17 @@
 const main = document.querySelector("main")
 
 window.addEventListener('click', (e) => {
-    console.log(e.target.baseURI) //this will give me the url i'm currently at
+    console.log() //this will give me the url i'm currently at
 })
 
-const getPost = async (title = "FirstExample") => {
-    // e.preventDefault()
+
+
+const showPost = async () => {
+    const title = sessionStorage.getItem("title");
     console.log(title)
-   
-    const response = await fetch(`http://localhost:3001/posts/${title}`)
-    const post = await response.json();
+    const post = await fetchPost(title)
+    console.log(post)
     const { title: postTitle, name, story } = post[0];
-    // console.log(story)
 
     const h1 = document.createElement("h1");
     const address = document.createElement("address");
@@ -20,9 +20,20 @@ const getPost = async (title = "FirstExample") => {
     h1.textContent = postTitle;
     address.textContent = name;
     p.textContent = story;
-    main.append(h1, address, p)
-    // console.log(title)
+    main && main.append(h1, address, p)
 
 }
-getPost()
+
+
+
+// window.onload = (e) => {
+//     // e.target.baseURI.includes("post") && showPost("FirstExample")
+//     //     const fetch = await fetchPost(title)
+//     //    showPost()
+//     console.log(e.target)
+// }
+window.onload = (e) => {
+    showPost()
+
+}
 // module.exports = { getPost }
