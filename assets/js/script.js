@@ -8,6 +8,8 @@ let messageP = document.getElementById('message-p')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider")
 
+const { getPost } = require('./post.js')
+
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
     { inputTag: pseudonym, pTag: pseudonymP, textContent: "Author" }
@@ -18,24 +20,27 @@ form.addEventListener('submit', (e) => {
     const titleValue = title.value;
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
-    
+
     createMessage(titleValue, pseudonymValue, messageValue)
     // fetch("http://localhost:3001/posts").then(res => res.json()).then(h => console.log(h))
 })
 
 
-async function createMessage(title, name, story, url = ""){
+async function createMessage(title, name, story, url = "") {
     // e.preventDefault();
     try {
         const options = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({title, name, story, url})
+            body: JSON.stringify({ title, name, story, url })
         }
         const response = await fetch('http://localhost:3001/posts', options);
         // const { id, err } = await response.json();
         console.log(response)
-    
+        window.location.href = "./post.html"
+        getPost && getPost(title)
+
+
     } catch (err) {
         console.warn(err);
     }
@@ -45,7 +50,7 @@ const keydownChanges = (input, pTag, textContent) => {
 
     // input && input.style.color = "green";
     divider.forEach(d => {
-    d.classList.add("dividerOnfocus") //!ESTO NO ANDAAA!!!
+        d.classList.add("dividerOnfocus") //!ESTO NO ANDAAA!!!
     })
     // alertBanner.setAttribute("style", "color: red; font-weight: bold"
 
