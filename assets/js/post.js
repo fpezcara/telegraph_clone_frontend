@@ -5,10 +5,13 @@ window.addEventListener('click', (e) => {
 })
 
 const getPost = async (title = "FirstExample") => {
+    // e.preventDefault()
+    console.log(title)
+   
     const response = await fetch(`http://localhost:3001/posts/${title}`)
     const post = await response.json();
     const { title: postTitle, name, story } = post[0];
-    console.log(story)
+    // console.log(story)
 
     const h1 = document.createElement("h1");
     const address = document.createElement("address");
@@ -18,7 +21,8 @@ const getPost = async (title = "FirstExample") => {
     address.textContent = name;
     p.textContent = story;
     main.append(h1, address, p)
+    // console.log(title)
 
 }
-
-module.exports = { getPost }
+getPost()
+// module.exports = { getPost }

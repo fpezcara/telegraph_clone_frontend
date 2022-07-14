@@ -8,7 +8,7 @@ let messageP = document.getElementById('message-p')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider")
 
-const { getPost } = require('./post.js')
+// const { getPost } = require('./post.js')
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -22,6 +22,8 @@ form.addEventListener('submit', (e) => {
     const messageValue = message.value;
 
     createMessage(titleValue, pseudonymValue, messageValue)
+    window.location.href = "./post.html"
+    getPost(titleValue, e)
     // fetch("http://localhost:3001/posts").then(res => res.json()).then(h => console.log(h))
 })
 
@@ -37,8 +39,8 @@ async function createMessage(title, name, story, url = "") {
         const response = await fetch('http://localhost:3001/posts', options);
         // const { id, err } = await response.json();
         console.log(response)
-        window.location.href = "./post.html"
-        getPost && getPost(title)
+       
+
 
 
     } catch (err) {
