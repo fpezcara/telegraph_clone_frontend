@@ -61,12 +61,18 @@ inputs && inputs.map(input => {
 })
 
 message && message.addEventListener('click', (e) => {
-    console.log("hole")
+    console.log(e)
     for (const icon of icons) {
         icon.style.color = 'rgba(0, 0, 0, .44)';
     }
 
 })
+
+message.onblur = () => {
+    for (const icon of icons) {
+        icon.style.color = 'white';
+    }
+}
 
 urlInput.addEventListener("click", () => {
     // <input type="file" name="file" id="file">
