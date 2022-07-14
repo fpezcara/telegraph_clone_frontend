@@ -8,7 +8,6 @@ const fetchPost = async (title) => {
 }
 
 const fetchToCreatePost = async (title, name, story, url, picture) => {
-    
     const options = {
         method: 'POST',
         headers: { "Content-Type": "application/json" },

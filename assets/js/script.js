@@ -6,11 +6,12 @@ let pseudonymP = document.getElementById('pseudonym-p')
 let message = document.getElementById('message')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider");
-let fileInput = document.querySelector("#file")
-let urlInput = document.querySelector('#url')
-let icons = document.querySelectorAll('.fa-solid')
-let urlIcon = document.getElementById('url-icons')
-let messageIContainer = document.getElementById("message-input-container")
+let fileInput = document.querySelector("#file");
+let icons = document.querySelectorAll('.fa-solid');
+let urlIcon = document.getElementById('url-icons');
+let messageIContainer = document.getElementById("message-input-container");
+const urlI = document.createElement("input");
+
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -25,8 +26,7 @@ form && form.addEventListener('submit', (e) => {
     const messageValue = message.value;
     const urlValue = urlInput.value;
     const images = fileInput.files;
-    // e.preventDefault();
-    console.log(images)
+    console.log(e)
     createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
     window.location.href = `./post.html`
     sessionStorage.setItem("title", titleValue);
@@ -36,7 +36,8 @@ form && form.addEventListener('submit', (e) => {
 const createMessage = async (title, name, story, url = "", images) => {
     try {
         // const { id, err } = await response.json();
-        const post = await fetchToCreatePost(title, name, story, url, images)
+        console.log(urlI.value)
+        const post = await fetchToCreatePost(title, name, story, url, images);
 
     } catch (err) {
         console.warn(err);
@@ -50,6 +51,9 @@ const keydownChanges = (input, pTag, textContent) => {
     divider.forEach(d => {
         d.classList.add("dividerOnfocus") //!NOT WORKIN!!
     })
+    console.log(urlI)
+
+
 }
 
 // create side p tags next to inputs when user starts typing
@@ -64,11 +68,13 @@ inputs && inputs.map(input => {
 
 
 
+
 message.onclick = () => {
     for (const icon of icons) {
         icon.style.color = 'rgba(0, 0, 0, .44)';
     }
-}
+};
+
 message.onblur = () => {
     for (const icon of icons) {
         icon.style.color = 'white';
@@ -77,25 +83,20 @@ message.onblur = () => {
 }
 
 
-
-
 urlIcon.onclick = () => {
     const urlIconCss = `
-    color: blue;
     padding: 0;
     margin: 3px 0 0 0;
     font-size: 16px;
     width: 430px;
-
     `
 
     message.style.display = "none"
-    const urlI = document.createElement("input");
     urlI.setAttribute('type', 'url');
     urlI.setAttribute('placeholder', "Paste a YouTube, Vimeo or Twitter link and press Enter")
     urlI.style.cssText = urlIconCss
     messageIContainer.appendChild(urlI)
-}
 
-// urlIcon.addEventListener('click', () => { console.log("hola") })
+
+}
 
