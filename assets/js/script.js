@@ -4,11 +4,11 @@ let titleP = document.getElementById('title-p')
 let pseudonym = document.getElementById('pseudonym')
 let pseudonymP = document.getElementById('pseudonym-p')
 let message = document.getElementById('message')
-let messageP = document.getElementById('message-p')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider");
 let fileInput = document.querySelector("#file")
 let urlInput = document.querySelector('#url')
+let icons = document.querySelectorAll('.fa-solid')
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -60,9 +60,12 @@ inputs && inputs.map(input => {
     })
 })
 
-message && message.addEventListener('keydown', (e) => {
-    // let urlInput = document.createElement("p");
-    // messageP.appendChild(urlInput)
+message && message.addEventListener('click', (e) => {
+    console.log("hole")
+    for (const icon of icons) {
+        icon.style.color = 'rgba(0, 0, 0, .44)';
+    }
+
 })
 
 urlInput.addEventListener("click", () => {

@@ -13,7 +13,6 @@ const showPost = async () => {
     address.textContent = `${name} - ${date}`;
     p.textContent = story;
     main && main.append(h1, address, p);
-    main.classList.add = "main";
 
 }
 

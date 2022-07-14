@@ -60,6 +60,7 @@ form {
 #message {
     font-size: 20px;
     width: 440px;
+    min-width: 400pxx;
 }
 
 
@@ -99,7 +100,9 @@ form {
 
 .fa-solid {
     font-size: 15px;
-    color: rgba(0, 0, 0, .44);
+    color: white;
+
+    /* color: rgba(0, 0, 0, .44); */
 }
 
 .fa-camera {
@@ -108,6 +111,14 @@ form {
 }
 
 #message-icons {
+    display: flex;
+    width: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.message-icons-appear {
     display: flex;
     width: 100px;
     align-items: center;
