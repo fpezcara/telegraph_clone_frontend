@@ -4,4 +4,9 @@
 
 body {
     font-family: "Lucida Grande", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+

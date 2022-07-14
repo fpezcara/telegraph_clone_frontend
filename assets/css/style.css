@@ -17,8 +17,6 @@ form {
 #form-container {
     display: flex;
     align-items: space-between;
-    /* align-items:; */
-    /*max-width: 50em; */
 
 }
 
@@ -26,9 +24,6 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: end; */
-    /* height: 40vh; */
-    /* padding: 2em; */
 
 }
 
@@ -47,15 +42,13 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; 
+    width: 100%;
 }
 
 #title {
     font-size: 40px;
     font-weight: bold;
     width: 50px;
-
-    /* padding: 0.2em; */
 }
 
 #pseudonym {
@@ -90,11 +83,11 @@ form {
     width: 30em;
 }
 
-#form-body .input-container:nth-child(1) > .divider  {
+#form-body .input-container:nth-child(1)>.divider {
     display: none;
 }
 
-#form-body > .input-container:nth-child(2) {
+#form-body>.input-container:nth-child(2) {
     height: 40px;
     margin-top: 2px;
     width: 30em;
@@ -102,15 +95,25 @@ form {
 
 }
 
-#form-body > .input-container:nth-child(2) > .divider  {
+#form-body>.input-container:nth-child(2)>.divider {
     display: none;
 }
-.input-container {
+
+.input-container>p {
+    color: rgba(0, 0, 0, .44);
     /* width: 100%; */
 }
-.divider {
-    
+
+#title-p {
+    font-size: 26px;
 }
+
+#pseudonym-p {
+    font-size: 16px;
+
+}
+
+.divider {}
 
 .dividerOnfocus {
     border-left: 1px solid #333;

@@ -23,7 +23,6 @@ form && form.addEventListener('submit', (e) => {
     createMessage(titleValue, pseudonymValue, messageValue)
     window.location.href = `./post.html`
     sessionStorage.setItem("title", titleValue);
-    // fetch("http://localhost:3001/posts").then(res => res.json()).then(h => console.log(h))
 })
 
 
