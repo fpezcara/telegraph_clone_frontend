@@ -7,14 +7,14 @@ const fetchPost = async (title) => {
 
 }
 
-const fetchToCreatePost = async (title, name, story, url, picture) => {
+const fetchToCreatePost = async (title, name, story, urlValue, picture) => {
 
     const formData = new FormData();
 
     formData.append('title', title);
     formData.append('name', name);
     formData.append('story', story);
-    formData.append('url', url);
+    formData.append('url', urlValue);
     formData.append('picture', picture[0]);
 
     const options = {

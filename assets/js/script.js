@@ -11,6 +11,7 @@ let icons = document.querySelectorAll('.fa-solid');
 let urlIcon = document.getElementById('url-icons');
 let messageIContainer = document.getElementById("message-input-container");
 let urlI = document.createElement("input");
+let renderPicture = document.querySelector('#render-picture')
 
 
 const inputs = [
@@ -24,7 +25,7 @@ form && form.addEventListener('submit', (e) => {
     const titleValue = title.value;
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
-    const urlValue = urlInput.value;
+    const urlValue = urlI.value;
     const picture = fileInput.files;
     // e.preventDefault();
     console.log(picture)
@@ -33,10 +34,10 @@ form && form.addEventListener('submit', (e) => {
 })
 
 
-const createMessage = async (title, name, story, url = "", picture) => {
+const createMessage = async (title, name, story, urlValue = "", picture) => {
     try {
         // const { id, err } = await response.json();
-        const post = await fetchToCreatePost(title, name, story, url, picture)
+        const post = await fetchToCreatePost(title, name, story, urlValue, picture)
 
     } catch (err) {
         console.warn(err);
@@ -65,20 +66,6 @@ inputs && inputs.map(input => {
 })
 
 
-
-
-// message.onclick = () => {
-//     for (const icon of icons) {
-//         icon.style.color = "darkslategray";
-//     }
-// };
-
-// message.onblur = () => {
-//     for (const icon of icons) {
-//         icon.style.color = 'white';
-//     }
-//     message.style.display = "flex";
-// }
 
 message && message.addEventListener('click', () => {
     for (const icon of icons) {
@@ -111,3 +98,19 @@ urlIcon && urlIcon.addEventListener('click', () => {
 
 })
 
+
+fileInput.addEventListener('change', (e) => {
+
+    const img = document.createElement('img')
+    img.className = 'pictureOnLoad'
+
+    renderPicture.append(img)
+
+    let reader = new FileReader();
+    reader.onload = () => {
+        img.src = reader.result;
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+
+});
