@@ -4,11 +4,14 @@ let titleP = document.getElementById('title-p')
 let pseudonym = document.getElementById('pseudonym')
 let pseudonymP = document.getElementById('pseudonym-p')
 let message = document.getElementById('message')
-let messageP = document.getElementById('message-p')
 let inputContainer = document.querySelectorAll("input-container")
 let divider = document.querySelectorAll(".divider");
-let fileInput = document.querySelector("#file")
-let urlInput = document.querySelector('#url')
+let fileInput = document.querySelector("#file");
+let icons = document.querySelectorAll('.fa-solid');
+let urlIcon = document.getElementById('url-icons');
+let messageIContainer = document.getElementById("message-input-container");
+let urlI = document.createElement("input");
+
 
 const inputs = [
     { inputTag: title, pTag: titleP, textContent: "Title" },
@@ -47,6 +50,8 @@ const keydownChanges = (input, pTag, textContent) => {
     divider.forEach(d => {
         d.classList.add("dividerOnfocus") //!NOT WORKIN!!
     })
+
+
 }
 
 // create side p tags next to inputs when user starts typing
@@ -59,14 +64,50 @@ inputs && inputs.map(input => {
     })
 })
 
-message && message.addEventListener('keydown', (e) => {
-    // let urlInput = document.createElement("p");
-    // messageP.appendChild(urlInput)
+
+
+
+// message.onclick = () => {
+//     for (const icon of icons) {
+//         icon.style.color = "darkslategray";
+//     }
+// };
+
+// message.onblur = () => {
+//     for (const icon of icons) {
+//         icon.style.color = 'white';
+//     }
+//     message.style.display = "flex";
+// }
+
+message && message.addEventListener('click', () => {
+    for (const icon of icons) {
+        icon.style.color = "darkslategray";
+    }
 })
 
-fileInput.addEventListener("click", () => {
-    // <input type="file" name="file" id="file">
-    message.style.display = "none";
+message && message.addEventListener('blur', () => {
+    for (const icon of icons) {
+        icon.style.color = 'white';
+    }
+    message.style.display = "flex";
 })
 
+
+urlIcon && urlIcon.addEventListener('click', () => {
+    const urlIconCss = `
+    padding: 0;
+    margin: 3px 0 0 0;
+    font-size: 16px;
+    width: 430px;
+    `
+
+    message.style.display = "none"
+    urlI.setAttribute('type', 'url');
+    urlI.setAttribute('placeholder', "Paste a YouTube, Vimeo or Twitter link and press Enter")
+    urlI.style.cssText = urlIconCss
+    messageIContainer.appendChild(urlI)
+
+
+})
 
