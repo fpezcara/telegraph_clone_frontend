@@ -16,8 +16,6 @@ const showPost = async () => {
 
 }
 
-
-// }
 window.onload = (e) => {
     showPost()
 

@@ -27,6 +27,8 @@ form && form.addEventListener('submit', (e) => {
     const urlValue = urlI.value;
     const images = fileInput.files;
     console.log(urlValue)
+    console.log(images)
+    console.log("input", fileInput)
     createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
     window.location.href = `./post.html`
     sessionStorage.setItem("title", titleValue);
@@ -51,7 +53,7 @@ const keydownChanges = (input, pTag, textContent) => {
     divider.forEach(d => {
         d.classList.add("dividerOnfocus") //!NOT WORKIN!!
     })
-
+    console.log(fileInput)
 
 }
 
@@ -65,21 +67,6 @@ inputs && inputs.map(input => {
     })
 })
 
-
-
-
-// message.onclick = () => {
-//     for (const icon of icons) {
-//         icon.style.color = "darkslategray";
-//     }
-// };
-
-// message.onblur = () => {
-//     for (const icon of icons) {
-//         icon.style.color = 'white';
-//     }
-//     message.style.display = "flex";
-// }
 
 message && message.addEventListener('click', () => {
     for (const icon of icons) {
