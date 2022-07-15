@@ -27,9 +27,10 @@ form && form.addEventListener('submit', (e) => {
     const messageValue = message.value;
     const urlValue = urlI.value;
     const picture = fileInput.files;
-    // e.preventDefault();
+    
     console.log(picture)
     createMessage(titleValue, pseudonymValue, messageValue, urlValue, picture)
+
     sessionStorage.setItem("title", titleValue);
 })
 
@@ -42,6 +43,7 @@ const createMessage = async (title, name, story, urlValue = "", picture) => {
     }
 
     const fetch = await fetchPost(title)
+    window.location.href = `./post.html`
 
 }
 const keydownChanges = (input, pTag, textContent) => {
