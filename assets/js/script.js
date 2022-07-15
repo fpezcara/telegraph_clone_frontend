@@ -22,19 +22,18 @@ form && form.addEventListener('submit', (e) => {
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
     const urlValue = urlInput.value;
-    const images = fileInput.files;
+    const picture = fileInput.files;
     // e.preventDefault();
-    console.log(images)
-    createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
-    window.location.href = `./post.html`
+    console.log(picture)
+    createMessage(titleValue, pseudonymValue, messageValue, urlValue, picture)
     sessionStorage.setItem("title", titleValue);
 })
 
 
-const createMessage = async (title, name, story, url = "", images) => {
+const createMessage = async (title, name, story, url = "", picture) => {
     try {
         // const { id, err } = await response.json();
-        const post = await fetchToCreatePost(title, name, story, url, images)
+        const post = await fetchToCreatePost(title, name, story, url, picture)
 
     } catch (err) {
         console.warn(err);
