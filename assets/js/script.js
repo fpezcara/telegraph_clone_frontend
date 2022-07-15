@@ -36,14 +36,12 @@ form && form.addEventListener('submit', (e) => {
 
 const createMessage = async (title, name, story, urlValue = "", picture) => {
     try {
-        // const { id, err } = await response.json();
         const post = await fetchToCreatePost(title, name, story, urlValue, picture)
-
     } catch (err) {
         console.warn(err);
     }
+
     const fetch = await fetchPost(title)
-    // console.log("RESPONSE in script.js ", fetch)
 
 }
 const keydownChanges = (input, pTag, textContent) => {
