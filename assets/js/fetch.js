@@ -1,10 +1,11 @@
-const port = 3002;
+const port = 3000;
 
 const fetchPost = async (title) => {
   const response = await fetch("https://telegraph-api.herokuapp.com/posts");
   const post = await response.json();
   return post;
 };
+
 
 const fetchToCreatePost = async (title, name, story, url, picture) => {
   const options = {
@@ -17,3 +18,4 @@ const fetchToCreatePost = async (title, name, story, url, picture) => {
     options
   );
 };
+

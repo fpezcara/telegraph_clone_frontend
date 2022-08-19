@@ -11,6 +11,7 @@ let icons = document.querySelectorAll('.fa-solid');
 let urlIcon = document.getElementById('url-icons');
 let messageIContainer = document.getElementById("message-input-container");
 let urlI = document.createElement("input");
+let renderPicture = document.querySelector('#render-picture')
 
 
 const inputs = [
@@ -31,21 +32,24 @@ form && form.addEventListener('submit', (e) => {
     console.log("input", fileInput)
     createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
     window.location.href = `./post.html`
+    const picture = fileInput.files;
+    
+    console.log(picture)
+    createMessage(titleValue, pseudonymValue, messageValue, urlValue, picture)
+
     sessionStorage.setItem("title", titleValue);
 })
 
 
-const createMessage = async (title, name, story, url = "", images) => {
+const createMessage = async (title, name, story, urlValue = "", picture) => {
     try {
-        // const { id, err } = await response.json();
-
-        const post = await fetchToCreatePost(title, name, story, url, images);
-
+        const post = await fetchToCreatePost(title, name, story, urlValue, picture)
     } catch (err) {
         console.warn(err);
     }
+
     const fetch = await fetchPost(title)
-    // console.log("RESPONSE in script.js ", fetch)
+    window.location.href = `./post.html`
 
 }
 const keydownChanges = (input, pTag, textContent) => {
@@ -99,3 +103,19 @@ urlIcon && urlIcon.addEventListener('click', () => {
 
 })
 
+
+fileInput.addEventListener('change', (e) => {
+
+    const img = document.createElement('img')
+    img.className = 'pictureOnLoad'
+
+    renderPicture.append(img)
+
+    let reader = new FileReader();
+    reader.onload = () => {
+        img.src = reader.result;
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+
+});
