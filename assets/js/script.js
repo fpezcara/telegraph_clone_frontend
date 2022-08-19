@@ -26,6 +26,12 @@ form && form.addEventListener('submit', (e) => {
     const pseudonymValue = pseudonym.value;
     const messageValue = message.value;
     const urlValue = urlI.value;
+    const images = fileInput.files;
+    console.log(urlValue)
+    console.log(images)
+    console.log("input", fileInput)
+    createMessage(titleValue, pseudonymValue, messageValue, urlValue, images)
+    window.location.href = `./post.html`
     const picture = fileInput.files;
     
     console.log(picture)
@@ -51,7 +57,7 @@ const keydownChanges = (input, pTag, textContent) => {
     divider.forEach(d => {
         d.classList.add("dividerOnfocus") //!NOT WORKIN!!
     })
-
+    console.log(fileInput)
 
 }
 
@@ -64,7 +70,6 @@ inputs && inputs.map(input => {
 
     })
 })
-
 
 
 message && message.addEventListener('click', () => {

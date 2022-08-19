@@ -16,8 +16,9 @@ form {
 
 #form-container {
     display: flex;
-    align-items: space-between;
-
+    align-items: center;
+    justify-content: space-between;
+    width: 50em;
 }
 
 #form-body {
@@ -73,12 +74,11 @@ form {
     border-radius: 16px;
     margin: 0 0 15px;
     font-size: 17px;
+   align-self: start;
 }
-
 
 #message-container {
     width: 600px;
-    /* width: 100%; */
 }
 
 #url {
@@ -96,8 +96,6 @@ form {
 .fa-solid {
     font-size: 15px;
     color: white;
-
-    /* color: rgba(0, 0, 0, .44); */
 }
 
 .fa-camera {
@@ -170,3 +168,4 @@ form {
     width: 720px;
     height: 600px;
 }
+

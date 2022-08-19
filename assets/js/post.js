@@ -24,6 +24,7 @@ const showPost = async () => {
         window.location.href = `./index.html`
     })
 
+
 }
 
 window.onload = (e) => {
