@@ -1,8 +1,7 @@
 import React from "react";
-import { Container, Row, Grid, Image } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
-import { format, parseISO } from "date-fns";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import SinglePost from "../../components/SinglePost";
 

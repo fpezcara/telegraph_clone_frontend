@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Home, Posts, Post, NotFound } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
