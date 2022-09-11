@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import SinglePost from "../../components/SinglePost";
 
 const Posts = () => {
-  const posts = useFetch("http://telegraph-api.herokuapp.com/posts");
+  const posts = useFetch("https://telegraph-api.herokuapp.com/posts");
   console.log(posts);
   return (
     <Container
