@@ -1,4 +1,4 @@
-# Telegram Clone - Client Side
+# Telegraph Clone - Client Side
 
 ## Installation & Usage
 
