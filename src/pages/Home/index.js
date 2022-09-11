@@ -18,14 +18,16 @@ const Home = () => {
 
   const handleStoryInput = (e) => {
     setStory(e.target.value);
-    story != "" ? setShowSideInput(false) : setShowSideInput(true);
+    story !== "" ? setShowSideInput(false) : setShowSideInput(true);
   };
   const body = { title, name, story, url, file: picture };
   // const postSomething = usePost(
   //   "https://telegraph-api.herokuapp.com/posts",
   //   body
   // );
-  const { postApi, data } = usePost();
+  const { postApi } = usePost();
+  // const { postApi, data } = usePost();
+
   const handleClick = (e) => {
     e.preventDefault();
     return postApi("http://telegraph-api.herokuapp.com/posts", body);
@@ -162,7 +164,7 @@ const Home = () => {
                       onChange={handleStoryInput}
                       value={story}
                       onClick={() =>
-                        story == ""
+                        story === ""
                           ? setShowSideInput(true)
                           : setShowSideInput(false)
                       }

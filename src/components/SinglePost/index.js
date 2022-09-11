@@ -1,11 +1,8 @@
 import React from "react";
 import { Row, Col, Image, Container } from "react-bootstrap";
-import useFetch from "../../hooks/useFetch";
-import { format, parseISO } from "date-fns";
-import { Link } from "react-router-dom";
+import { format} from "date-fns";
 
 const SinglePost = ({ post }) => {
-  console.log("HEEEY", post);
   return (
     <Container className="" style={{ minWidth: "60%" }}>
       <Row>
