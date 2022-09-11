@@ -30,7 +30,7 @@ const Home = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    return postApi("http://telegraph-api.herokuapp.com/posts", body);
+    return postApi("https://telegraph-api.herokuapp.com/posts", body);
   };
   console.log(showSideInput);
 
