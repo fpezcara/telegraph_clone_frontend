@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
 import SinglePost from "../../components/SinglePost";
+import { collection, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 const Posts = () => {
-  const posts = useFetch("https://telegraph-api.herokuapp.com/posts");
+  const [posts, setPosts] = useState([]);
+
+  const postsCollectionRef = collection(db, "posts");
+  // console.log(postsCollectionRef);
+  // const postsconsole.log(collection(db, 'posts'))
+  const getPosts = async () => {
+    const data = await getDocs(postsCollectionRef);
+    setPosts(data.docs.reverse().map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  console.log(posts);
+
+  // getPosts()
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   console.log(posts);
   return (
     <Container

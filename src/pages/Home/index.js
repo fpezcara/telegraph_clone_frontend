@@ -5,7 +5,9 @@ import {
   BsChevronRight,
   BsFillCameraFill,
 } from "react-icons/bs";
-import usePost from "../../hooks/usePost";
+import { Link } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { db, storage } from "../../firebase-config";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -16,32 +18,30 @@ const Home = () => {
   const [seeUrlInput, setSeeUrlInput] = useState(false);
   const [showSideInput, setShowSideInput] = useState(false);
 
+  const postsCollectionRef = collection(db, "posts");
+
   const handleStoryInput = (e) => {
     setStory(e.target.value);
     story !== "" ? setShowSideInput(false) : setShowSideInput(true);
   };
-  const body = { title, name, story, url, file: picture };
-  // const postSomething = usePost(
-  //   "https://telegraph-api.herokuapp.com/posts",
-  //   body
-  // );
-  const { postApi } = usePost();
-  // const { postApi, data } = usePost();
-
+  const body = { title, name, story, url, file: picture, date: new Date() };
+  const createPost = async () => {
+    try {
+      await addDoc(postsCollectionRef, body);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  console.log(picture);
   const handleClick = (e) => {
     e.preventDefault();
-    return postApi("https://telegraph-api.herokuapp.com/posts", body);
+    createPost();
   };
-  console.log(showSideInput);
 
   return (
-    <Container
-      // fluid="lg"
-      className="mt-4 d-flex justify-content-lg-center"
-      // style={{ height: "500px" }}
-    >
+    <Container className="mt-4 d-flex justify-content-lg-center">
       <Row
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center pt-4"
         style={{ width: "85%" }}
       >
         <Form className="d-flex flex-lg-row flex-column flex-md-column flex-sm-column flex-xs-column align-items-lg-end justify-content-lg-end">
@@ -188,7 +188,9 @@ const Home = () => {
               onClick={handleClick}
               type="submit"
             >
-              Publish
+              <Link id="post-new" to="/posts">
+                Publish
+              </Link>
             </Button>
           </Col>
         </Form>

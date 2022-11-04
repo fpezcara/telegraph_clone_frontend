@@ -1,8 +1,16 @@
 import React from "react";
 import { Row, Col, Image, Container } from "react-bootstrap";
-import { format} from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const SinglePost = ({ post }) => {
+  // console.log("jiji", format(post.date.toDate()));
+  const date =
+    post.date &&
+    post.date
+      .toDate()
+      .toLocaleString("en-GB", { timeZone: "UTC" })
+      .split(",")[0];
+
   return (
     <Container className="" style={{ minWidth: "60%" }}>
       <Row>
@@ -35,9 +43,11 @@ const SinglePost = ({ post }) => {
           className="d-flex justify-content-center align-items-center"
         >
           <p className="fs-6">
-            {/* {format(parseISO(post.date), "MM/dd/yyyy")} */}
-            {/* /!/when date is fixed we can use function above */}
-            {format(new Date(), "dd/MM/yyyy")}
+            {post.date &&
+              post.date
+                .toDate()
+                .toLocaleString("en-GB", { timeZone: "UTC" })
+                .split(",")[0]}
           </p>
         </Col>
       </Row>
