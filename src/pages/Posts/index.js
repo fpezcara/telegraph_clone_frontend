@@ -2,27 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SinglePost from "../../components/SinglePost";
-import { collection, getDocs, orderBy } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   const postsCollectionRef = collection(db, "posts");
-  // console.log(postsCollectionRef);
-  // const postsconsole.log(collection(db, 'posts'))
+
   const getPosts = async () => {
-    const data = await getDocs(postsCollectionRef);
+    const data = await getDocs(query(postsCollectionRef, orderBy("date")));
     setPosts(data.docs.reverse().map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  console.log(posts);
 
-  // getPosts()
   useEffect(() => {
     getPosts();
   }, []);
 
-  console.log(posts);
   return (
     <Container
       fluid
@@ -35,10 +31,7 @@ const Posts = () => {
             className="text-decoration-none text-dark"
           >
             <SinglePost key={post.id} post={post} i={i} />
-            <Row
-              className="mt-2 d-flex align-items-end justify-content-end"
-              // style={{ width: "60%" }}
-            >
+            <Row className="mt-2 d-flex align-items-end justify-content-end">
               {i !== posts.length - 1 && (
                 <div
                   className="vr w-100 d-flex align-items-end justify-content-end justify-self-end align-self-end"

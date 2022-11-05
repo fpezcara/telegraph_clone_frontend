@@ -7,13 +7,14 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebase-config";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [story, setStory] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState(null);
   const [url, setUrl] = useState("");
   const [seeUrlInput, setSeeUrlInput] = useState(false);
   const [showSideInput, setShowSideInput] = useState(false);
@@ -24,15 +25,27 @@ const Home = () => {
     setStory(e.target.value);
     story !== "" ? setShowSideInput(false) : setShowSideInput(true);
   };
-  const body = { title, name, story, url, file: picture, date: new Date() };
+
   const createPost = async () => {
+    if (!title) return;
     try {
-      await addDoc(postsCollectionRef, body);
+      const body = {
+        title,
+        name,
+        story,
+        url,
+        picture: picture.name,
+        date: new Date(),
+      };
+      const newPost = await addDoc(postsCollectionRef, body);
+
+      const imageRef = ref(storage, `images/${picture.name + newPost.id}`);
+      await uploadBytes(imageRef, picture);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log(picture);
+
   const handleClick = (e) => {
     e.preventDefault();
     createPost();
@@ -76,6 +89,7 @@ const Home = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     size="sm"
+                    required
                   />
                 </Col>
               </Form.Group>
@@ -141,8 +155,7 @@ const Home = () => {
                     name="image"
                     className="d-none"
                     id="file"
-                    onChange={(e) => setPicture(e.target.value)}
-                    value={picture}
+                    onChange={(e) => setPicture(e.target.files[0])}
                   />
                   {seeUrlInput ? (
                     <Form.Control
@@ -179,7 +192,6 @@ const Home = () => {
             lg={2}
             md={12}
             xs={12}
-            // md={12}
           >
             <Button
               className="border border-dark border-2 border-radius-3 text-uppercase rounded-pill fw-bold mt-lg-0 mt-md-4"

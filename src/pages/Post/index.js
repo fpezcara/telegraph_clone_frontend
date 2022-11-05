@@ -15,12 +15,13 @@ const Post = () => {
 
   const getPost = async () => {
     const posts = await getDocs(q);
-    posts.forEach((doc) => setPost(doc.data()));
+    posts.forEach((doc) => {
+      setPost({ ...doc.data(), id: doc.id });
+    });
   };
   useEffect(() => {
     getPost();
   }, []);
-  // console.log(post.date.toDate());
   return (
     <Container className="d-flex flex-lg-column justify-content-center mt-5">
       {post && <SinglePost post={post} />}
