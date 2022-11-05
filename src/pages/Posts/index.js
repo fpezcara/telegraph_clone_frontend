@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
 import SinglePost from "../../components/SinglePost";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 const Posts = () => {
-  const posts = useFetch("https://telegraph-api.herokuapp.com/posts");
-  console.log(posts);
+  const [posts, setPosts] = useState([]);
+
+  const postsCollectionRef = collection(db, "posts");
+
+  const getPosts = async () => {
+    const data = await getDocs(query(postsCollectionRef, orderBy("date")));
+    setPosts(data.docs.reverse().map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <Container
       fluid
@@ -19,10 +31,7 @@ const Posts = () => {
             className="text-decoration-none text-dark"
           >
             <SinglePost key={post.id} post={post} i={i} />
-            <Row
-              className="mt-2 d-flex align-items-end justify-content-end"
-              // style={{ width: "60%" }}
-            >
+            <Row className="mt-2 d-flex align-items-end justify-content-end">
               {i !== posts.length - 1 && (
                 <div
                   className="vr w-100 d-flex align-items-end justify-content-end justify-self-end align-self-end"

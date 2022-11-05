@@ -5,43 +5,56 @@ import {
   BsChevronRight,
   BsFillCameraFill,
 } from "react-icons/bs";
-import usePost from "../../hooks/usePost";
+import { Link } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
+import { db, storage } from "../../firebase-config";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [story, setStory] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState(null);
   const [url, setUrl] = useState("");
   const [seeUrlInput, setSeeUrlInput] = useState(false);
   const [showSideInput, setShowSideInput] = useState(false);
+
+  const postsCollectionRef = collection(db, "posts");
 
   const handleStoryInput = (e) => {
     setStory(e.target.value);
     story !== "" ? setShowSideInput(false) : setShowSideInput(true);
   };
-  const body = { title, name, story, url, file: picture };
-  // const postSomething = usePost(
-  //   "https://telegraph-api.herokuapp.com/posts",
-  //   body
-  // );
-  const { postApi } = usePost();
-  // const { postApi, data } = usePost();
+
+  const createPost = async () => {
+    if (!title) return;
+    try {
+      const body = {
+        title,
+        name,
+        story,
+        url,
+        picture: picture.name,
+        date: new Date(),
+      };
+      const newPost = await addDoc(postsCollectionRef, body);
+
+      const imageRef = ref(storage, `images/${picture.name + newPost.id}`);
+      await uploadBytes(imageRef, picture);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    return postApi("https://telegraph-api.herokuapp.com/posts", body);
+    createPost();
   };
-  console.log(showSideInput);
 
   return (
-    <Container
-      // fluid="lg"
-      className="mt-4 d-flex justify-content-lg-center"
-      // style={{ height: "500px" }}
-    >
+    <Container className="mt-4 d-flex justify-content-lg-center">
       <Row
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center pt-4"
         style={{ width: "85%" }}
       >
         <Form className="d-flex flex-lg-row flex-column flex-md-column flex-sm-column flex-xs-column align-items-lg-end justify-content-lg-end">
@@ -76,6 +89,7 @@ const Home = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     size="sm"
+                    required
                   />
                 </Col>
               </Form.Group>
@@ -141,8 +155,7 @@ const Home = () => {
                     name="image"
                     className="d-none"
                     id="file"
-                    onChange={(e) => setPicture(e.target.value)}
-                    value={picture}
+                    onChange={(e) => setPicture(e.target.files[0])}
                   />
                   {seeUrlInput ? (
                     <Form.Control
@@ -179,7 +192,6 @@ const Home = () => {
             lg={2}
             md={12}
             xs={12}
-            // md={12}
           >
             <Button
               className="border border-dark border-2 border-radius-3 text-uppercase rounded-pill fw-bold mt-lg-0 mt-md-4"
@@ -188,7 +200,9 @@ const Home = () => {
               onClick={handleClick}
               type="submit"
             >
-              Publish
+              <Link id="post-new" to="/posts">
+                Publish
+              </Link>
             </Button>
           </Col>
         </Form>

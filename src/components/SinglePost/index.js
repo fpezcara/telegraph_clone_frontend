@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Image, Container } from "react-bootstrap";
-import { format} from "date-fns";
+import { storage } from "../../firebase-config";
+import { listAll, ref, getDownloadURL } from "firebase/storage";
 
 const SinglePost = ({ post }) => {
+  const imageListRef = ref(storage, "images/");
+  const [image, setImage] = useState("");
+
+  const getImage = async (picName) => {
+    if (!post.picture || !picName) return;
+    try {
+      const allImages = await listAll(imageListRef);
+      const i = allImages.items.find((item) => picName == item.name);
+      const pic = await getDownloadURL(i);
+      return pic;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  getImage(post.picture + post.id).then((url) => setImage(url));
+
   return (
     <Container className="" style={{ minWidth: "60%" }}>
       <Row>
@@ -35,9 +53,11 @@ const SinglePost = ({ post }) => {
           className="d-flex justify-content-center align-items-center"
         >
           <p className="fs-6">
-            {/* {format(parseISO(post.date), "MM/dd/yyyy")} */}
-            {/* /!/when date is fixed we can use function above */}
-            {format(new Date(), "dd/MM/yyyy")}
+            {post.date &&
+              post.date
+                .toDate()
+                .toLocaleString("en-GB", { timeZone: "UTC" })
+                .split(",")[0]}
           </p>
         </Col>
       </Row>
@@ -46,14 +66,14 @@ const SinglePost = ({ post }) => {
           <p className="fw-italic fs-5">{post.story}</p>
         </Row>
       )}
-      {(post.picture || post.file) && (
+      {image && (
         <Row>
-          <Image src={post?.picture || post.file} className="fw-italic fs-6" />
+          <Image src={image} className="fw-italic fs-6" />
         </Row>
       )}
       {post.url && (
         <Row>
-          <p src={post?.picture || post.file} className="fw-italic fs-6">
+          <p src={post?.url} className="fw-italic fs-6">
             {post.url}
           </p>
         </Row>
