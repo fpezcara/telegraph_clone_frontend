@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col, Image, Container } from "react-bootstrap";
 import { storage } from "../../firebase-config";
 import { listAll, ref, getDownloadURL } from "firebase/storage";
@@ -11,7 +11,7 @@ const SinglePost = ({ post }) => {
     if (!post.picture || !picName) return;
     try {
       const allImages = await listAll(imageListRef);
-      const i = allImages.items.find((item) => picName == item.name);
+      const i = allImages.items.find((item) => picName === item.name);
       const pic = await getDownloadURL(i);
       return pic;
     } catch (err) {

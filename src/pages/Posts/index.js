@@ -17,7 +17,7 @@ const Posts = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  });
 
   return (
     <Container
